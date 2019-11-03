@@ -1,2 +1,2 @@
 # cloudformation
-aws cloudformation templatew
+aws cloudformation templates
