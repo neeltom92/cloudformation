@@ -1,0 +1,23 @@
+---
+AWSTemplateFormatVersion: '2010-09-09'
+
+Description: Template for creating SSL certificate via AWSCertificateManager
+#Validation method is manaul for the time being via DNS
+#Can add auto validation method described here https://binx.io/blog/2018/10/05/automated-provisioning-of-acm-certificates-using-route53-in-cloudformation/
+
+Parameters:
+
+  DomainName:
+    Description: Domain Name for your application loadbalancer
+    Type: String
+    MinLength: 1
+    MaxLength: 253
+    AllowedPattern: "^(\\*\\.)?(((?!-)[A-Za-z0-9-]{0,62}[A-Za-z0-9])\\.)+((?!-)[A-Za-z0-9-]{1,62}[A-Za-z0-9])$"
+
+Resources:
+
+  SSLCertificate:
+    Type: AWS::CertificateManager::Certificate
+    Properties:
+      DomainName: !Ref DomainName
+      ValidationMethod: DNS
